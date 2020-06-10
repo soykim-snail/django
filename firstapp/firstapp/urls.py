@@ -21,5 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
     path('dinner/', views.dinner),
-    path('photo/', views.photo)
+    path('photo/', views.photo),
+    # path('hello/<str:name>/', views.hello)
+    path('hello/<name>/', views.hello), # str 타입선언은 생략 가능
+    path('intro/<name>/<int:age>', views.intro),
+    path('gugu/<int:num1>/<int:num2>/', views.gugu),
+    path('dtl-practice/', views.dtl_practice),
+    path('word/<word>/', views.word_check),
 ]
