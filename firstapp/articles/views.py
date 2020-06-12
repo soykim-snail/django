@@ -5,9 +5,9 @@
 # 4. local django
 
 import random
+from pprint import pprint
 from datetime import datetime
 from django.shortcuts import render
-
 
 # Create your views here.
 def index(request):
@@ -82,3 +82,19 @@ def word_check(request, word):
         'pal' : pal,
     }
     return render(request, 'word_check.html', context)
+
+# 메아리 만드는 사이트
+# 입력을 받는다.
+def throw(request):
+    return render(request, 'throw.html')
+
+# 입력을 되돌려준다.
+def catch(request):
+    # pprint(request.META)
+    # print(request.GET) # <QueryDict: {'message': ['farfaraway']}>
+    # print(request.GET.get('message'))  # farfaraway
+    context ={
+        'message' : request.GET.get('message'),
+        'character' : request.GET.get('character'),
+    }
+    return render(request, 'catch.html', context)

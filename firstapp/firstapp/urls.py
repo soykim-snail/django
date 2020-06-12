@@ -28,4 +28,6 @@ urlpatterns = [
     path('gugu/<int:num1>/<int:num2>/', views.gugu),
     path('dtl-practice/', views.dtl_practice),
     path('word/<word>/', views.word_check),
+    path('throw/', views.throw),
+    path('catch/', views.catch),    
 ]
