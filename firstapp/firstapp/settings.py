@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 1. local apps 먼저 작성
-    'articles',
+    'articles', 
+    'pages',
     # 2. 3rd party apps
     # 3. django apps
     'django.contrib.admin',
@@ -58,7 +59,8 @@ ROOT_URLCONF = 'firstapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 프로젝트의 경로 추가
+        'DIRS': [os.path.join(BASE_DIR, 'firstapp', 'templates')],  # 윈도우즈, 리눅스 등등 OS에 무관하게 경로가 항상 작동하도록 os.path 함수를 사용한다.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# static 파일의 커스텀 경로를 넣고 싶으면,
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'firstapp', 'static'),
+]
+

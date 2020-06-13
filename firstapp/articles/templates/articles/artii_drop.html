@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}artii drop{% endblock %}
+
+{% block content %}   
+    <h1>나만의 ASCII ARTII</h1>
+    <form action="{% url 'articles:artii_result_drop' %}" method="get">
+    <label for="word">단어를 입력해 주세요. : </label><input type="text" name="word"><br>
+    <label for="font">폰트를 정해주세요. : </label><select name="font" id="">
+    {% for font in fonts_list %}
+        <option value="{{ font }}">{{ font }}</option>
+    {% endfor %}
+    </select><br>
+    <input type="submit" value="만들기!!">
+    </form>
+{% endblock %}

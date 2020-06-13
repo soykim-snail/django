@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}artii입니다.{% endblock %}
+
+{% block content %}
+<h1>나만의 ASCII ART</h1>
+<form action="{% url 'articles:artii_result' %}" method="get">
+    단어를 입력해 주세요.
+    <input type="text" name="word">
+    <input type="submit" value="만들기">
+    <a href="{% url 'articles:index' %}">index로 가기</a>
+</form>
+{% endblock  %}
