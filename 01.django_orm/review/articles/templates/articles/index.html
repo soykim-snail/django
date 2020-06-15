@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+<h1>Test 입니다.</h1>
+{% for article in  articles %}
+<hr>
+<p> {{article.pk}} </p>
+<p> {{article.my_title}} </p>
+<p> {{article.my_content}} </p>
+<p> {{article.my_created_at}} </p>
+<p> {{article.my_updated_at}} </p>
+
+{% endfor %}
+</div>
+{% endblock  %}
