@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>PAGE INDEX</h1>
+<a href="{% url 'pages:new' %}">NEW</a>
+<hr>
+    <table style="width:100%">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>작성일시</th>
+        <th>수정일시</th>
+        <th>EDIT</th>            
+        <th>DETAIL</th>            
+    </tr>
+{% for page in pages %}
+    <tr>
+        <td>{{ page.pk  }}</td>
+        <td>{{ page.title  }}</td>
+        <td>{{ page.content  }}</td>
+        <td>{{ page.created_at  }}</td>
+        <td>{{ page.updated_at  }}</td>
+        <td><a href="{% url 'pages:edit' page.pk %}">EDIT</a></td>
+        <td><a href="{% url 'pages:detail' page.pk %}">DETAIL</a></td>
+    </tr>
+{% endfor %}
+    </table>      
+
+{% endblock  %}
