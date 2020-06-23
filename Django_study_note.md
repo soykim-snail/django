@@ -52,9 +52,11 @@ trailing comma를 허용한다.
 
 \# 4. local django
 
-### jango template language
+### django template language (dtl)
 
 - variable routing
+
+---
 
 ##### 실습: 사용자의 입력값을 그대로 돌려주는 사이트를 만들어 보자
 
@@ -92,6 +94,7 @@ trailing comma를 허용한다.
   {% endfor %}
   ```
 
+---
 
 ### 프로젝트 만들기 (FIRSTAPP)
 
@@ -390,7 +393,18 @@ article.delete() # 삭제
 ## admin 작성 순서
 
 1. `python manage.py createsuperuser`
+
 2. `admin.py` 작성
+
+   ```python
+   # Register your models here.
+   Class ArticleAdmin(admin.ModelAdmin):
+       list_display = ['pk', 'title', 'content', 'created_at',]
+       list_editable = ['title']
+   admin.site.register(Article, ArticleAdmin)
+   ```
+
+   
 
 ---
 
@@ -492,4 +506,183 @@ article.delete() # 삭제
           return ...
   ```
 
+---
+
+# Django form
+
+참고자료 : 	
+
+> [폼과 함께 작업하기] https://docs.djangoproject.com/ko/2.1/ref/forms/fields/	
+>
+> [Form fields] https://docs.djangoproject.com/ko/2.1/topics/forms/  
+>
+> [Widgets] https://docs.djangoproject.com/en/3.0/ref/forms/widgets/
+
+- form 내 field 들, field 배치, widget, label … 유효한 값 등을 정의하고 비유요한 field에 관련된 에러메세지를 결정한다.
+
+- 유효성 체크 : 우리가 직접 form 태그를 작성하는 것보다 유효한 데이터에 요구되는 여러 동작을 올바륵 하기 위해서 제공하는 기능
+
   
+
+- 장고 템플릿 표현
+
+  `<p>` ,` <ul>` , `<table>` 태그로 감싸기 옵션이 가능
+
+  ```django
+  {{ form }}
+  {{ form.as_p }}
+  {{ form.as_ul }}
+  {{ form.as_table }}
+  ```
+
+- `forms.py` 만들기
+
+  - `ModelForm`
+    - django가 해당하는 모델에서 양식에 필요한 정보를 이미 정의했다.
+
+  ```python
+  from django import forms
+  from .models import Article
+  
+  # ArticleForm 사용하면... 반복작업 많으니
+  class ArticleForm(forms.Form):
+      title = forms.CharField(max_length=20)
+      content = forms.CharField(widget=forms.Textarea)
+  
+  # ModelForm 사용하자!
+  class ArticleForm(forms.ModelForm):
+      title = forms.CharField(
+          label='제목',
+          widget=forms.TextInput(
+              attrs={
+                  'class': 'my-title',
+                  'placeholder ': 'Enter the title.',
+              }
+          )
+      )
+      content = forms.CharField(
+          label='내용',
+          widget=forms.Textarea(
+              attrs={
+                  'class': 'my-content',
+                  'placeholder': 'Enter the content.',
+                  'cols' : 30,
+                  'rows' : 10,
+              }
+          )
+      )
+      # ArticleForm 클래스에 대한 정보를 작성하는 곳 (장고 문법)
+      class Meta:
+          # 참조할 모델을 선택한다.        
+          model = Article
+          # 사용한 필드를 선택한다.
+          fields = ['title', 'content']  # fields = '__all__'  # exclude = ['title']
+  ```
+
+- url 합치기
+
+  - 작성하기(new)와 저장하기(create)를 하나로 합치자. 요청이 GET으로 오면 new 역할, POST로 오면 create 역할.
+  - 수정하기(edit)와 저장하기(update)도 하나로 합치자. 요청이 GET으로 오면 edit 역할, POST로 오면 update 역할
+
+  ```python
+  urlpatterns = [
+      ...
+      path('create/', views.create, name=create),
+      path('<int:pk>/update/', views.update, name=update),
+  ]
+  ```
+
+- view 합치기
+
+  - CREATE : 요청이 GET으로 오면 new 역할, POST로 오면 create 역할.
+
+    ```python
+    def create(request):
+        if request.method == "POST":
+            form = ArticleForm(request.POST)
+            if form.is_valid():
+                article = form.save()
+    	        return redirect('articles:detail', article.pk)
+        else:
+            form = ArticleForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'articles/create.html', context)
+    ```
+
+  - UPDATE : 요청이 GET으로 오면 edit 역할, POST로 오면 update 역할
+
+    ```python
+    def update(request, pk):
+        if request.method == "POST":
+            article = Article.objects.get(pk=pk)
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                form.save()
+                return redirect('articles:detail', article.pk)
+        else:
+            form = ArticleForm(instance=article)
+        context = {
+            'form': form,
+        }
+        return render(request, 'articles/update.html', context)
+    ```
+
+### Form에 Bootstrap4 적용하기
+
+- class 이용하는 방법
+- library 이용하는 방법
+
+## decorator
+
+```python
+from django.views.decorators.http import require_http_methods
+@require_http_methods(["GET", "POST"])
+def ...(...):
+```
+
+
+
+---
+
+# Django many to one (복수 모델 사용하기)
+
+관계설정이란? 여러개의 테이블을 만들고, 칼럼이나 새 테이블로 관계를 설정해 준다.
+
+- shell 사용하여 콘솔에서 ORM 사용하기
+
+settings.py설정 
+
+```python
+INSTALLED_APPS = [
+    ...
+  'django_extensions', # 추가하였음……
+	...		
+]
+```
+
+shell 창에서
+
+```
+$ python manage.py shell_plus
+```
+
+글을 작성하고, 조회하자
+
+```
+In [1]: Article.objects.all()
+Out[1]: <QuerySet []>
+
+In [2]: Article.objects.create(title="Hello", content="hihi!")
+Out[2]: <Article: Article object (1)>
+
+
+```
+
+
+
+
+
+
+
