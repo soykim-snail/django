@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ question.title }}
+    {{ question.answer_a }}
+    {{ question.answer_b }}
+<hr>
+    <form action="{% url 'questions:answer_create' question.pk %}" method="POST">
+        {% csrf_token %}
+        {{ answer_form }}
+        <button>저장</button>
+    </form>
+
+    {% for answer in question.answer_set.all %}
+        {{ answer.choice }}
+    {% endfor %}
+
+    {{ answer_a }}
+    {{ answer_b }}
+
+{% endblock  %}

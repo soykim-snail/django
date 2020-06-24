@@ -109,3 +109,20 @@ user = models.models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCA
 
 로그인 한 경우만 사용할 수 있도로 하려면, `@login_required` 데코레이터를 사용한다. (`from django.contrib.auth.decorators import login_required` 임포트 필요함)
 
+----
+
+# Either 사이트 만들기
+
+
+
+[방법1] 새로운 커스텀유저 클래스 만들기       vs.       [방법2] 유저의 추가정보 클래스 만들고 1:1 대응시키기
+
+![image](https://user-images.githubusercontent.com/58576911/85486103-f2ed8c00-b604-11ea-962d-e9abbba53e74.png)
+
+
+
+[방법1] 새로운 커스텀유저 클래스 만들기
+
+
+
+![image](https://user-images.githubusercontent.com/58576911/85488860-00594500-b60a-11ea-86d4-e3aa1eef15d4.png)
