@@ -126,3 +126,13 @@ user = models.models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCA
 
 
 ![image](https://user-images.githubusercontent.com/58576911/85488860-00594500-b60a-11ea-86d4-e3aa1eef15d4.png)
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/58576911/85492550-4e714700-b610-11ea-953c-fd53cd39602b.png)
+
+
+
+![image](https://user-images.githubusercontent.com/58576911/85501386-415c5400-b620-11ea-903a-e61104885ac0.png)

@@ -680,9 +680,39 @@ Out[2]: <Article: Article object (1)>
 
 ```
 
+---
 
+# File 전송하기
 
+* `<form>` 안에  `enctype="multipart/form-data"` 설정해야 함
 
+  * application/x-www-form-urlencodedㄷㄷ치
+    * Default. All characters are encoded before sent (spaces are converted to "+" symbols, and special characters are converted to ASCII HEX values)
+  * multipart/form-data
+    * No characters are encoded. This value is required when you are using forms that have a file upload control
+  * text/plain
+    * Spaces are converted to "+" symbols, but no special characters are encoded
 
+* 미디어 파일이 저장될 위치를 설정함
 
+  `settings.py`
+
+---
+
+# n : n 연관
+
+1:N 연관이 양쪽에서 생기는 경우 의미함.
+
+(예시:  게시글의 좋아요, 팔로우와 팔로워, 환자와 의사, … )
+
+model을 작성할 때 `models.ManyToManyField` 으로 연결을 지정한다. (이전에 연결이 존재하여 이름이 충돌한다면, `related_name=` 으로 이름수정 가능함.) 
+
+ManyToMany 연결을 위해서, 장고 내부적으로는 매칭테이블이 만들어진다.
+
+| #    | id   | post_id | user_id |
+| ---- | ---- | ------- | ------- |
+| 1    | 4    | 5       | 2       |
+| 2    | 5    | 4       | 2       |
+| 3    | 11   | 1       | 2       |
+| 4    | 12   | 7       | 2       |
 
