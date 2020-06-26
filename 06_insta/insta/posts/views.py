@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from .models import Post
+from django.http import JsonResponse 
+# JsonResponse 함수는 Python 딕셔너리를 json으로 바꿔준다.
 
 # Create your views here.
 def index(request):
@@ -39,8 +41,17 @@ def like(request, post_pk):
     if post in user.like_posts.all(): # 사용자가 좋아요 버튼을 이미 누른경우
         # 좋아요 제거
         user.like_posts.remove(post)
+        liked = False
     else: # 좋아요 버튼을 아직 안 누른 경우
         # 좋아요 추가
         user.like_posts.add(post)
+        liked = True
 
-    return redirect('posts:index')
+    # return redirect('posts:index')
+
+    context = {
+        'msg': '좋아요기능이 동작했습니다.',
+        'liked': liked,
+    }
+
+    return JsonResponse(context)

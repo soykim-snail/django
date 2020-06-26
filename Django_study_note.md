@@ -716,3 +716,66 @@ ManyToMany 연결을 위해서, 장고 내부적으로는 매칭테이블이 만
 | 3    | 11   | 1       | 2       |
 | 4    | 12   | 7       | 2       |
 
+---
+
+# RESTFul
+
+![img](https://gmlwjd9405.github.io/images/network/rest.png)
+
+“Representational State Transfer” 의 약자
+자원을 이름(자원의 표현)으로 구분하여 해당 자원의 상태(정보)를 주고 받는 모든 것을 의미한다.
+https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html
+
+
+
+REST API 란?
+
+“Representational State Transfer” 의 약자
+자원을 이름(자원의 표현)으로 구분하여 해당 자원의 상태(정보)를 주고 받는 모든 것을 의미한다.
+https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html
+
+---
+
+# ORM 작동의 3단계
+
+### 1) `models.py`  : 파이썬의 클래스 모델링
+
+### 2) `makemigrations` : RDB  CRUD를 위한 번역
+
+### 3) `migrate` : db.sqlite3 만들기
+
+---
+
+# onclick event 설정
+
+JS 이벤트 설정의 키 포인트
+
+1) 누구를
+
+```javascript
+var ... = document.querySelectorAll('...')
+```
+
+2) 어떻게 했을 때         
+
+`click`, `...`
+
+3) 뭐뭐를 한다.
+
+```javascript
+likeButton.addEventListener('click', function(){...})
+누구를.addEventListenr('어떻게', function(){뭐뭐...})
+```
+
+(참고) `things.forEach(익명함수)` :  for thing in things function(){ … …}
+
+
+
+---
+
+상대경로와 절대경로
+
+`/` : 최상단 루트 경로부터 시작함을 의미함.
+
+---
+
