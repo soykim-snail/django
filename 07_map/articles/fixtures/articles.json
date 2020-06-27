@@ -1,0 +1,42 @@
+[
+{
+  "model": "articles.article",
+  "pk": 1,
+  "fields": {
+    "title": "test",
+    "content": "test",
+    "created_at": "2020-06-27T00:35:28.333Z",
+    "updated_at": "2020-06-27T00:35:28.333Z"
+  }
+},
+{
+  "model": "articles.article",
+  "pk": 2,
+  "fields": {
+    "title": "Map \uc218\uc5c5",
+    "content": "\uc624\ub298\uc744 \ud1a0\uc694\uc77c \uc785\ub2c8\ub2e4.",
+    "created_at": "2020-06-27T00:36:00.197Z",
+    "updated_at": "2020-06-27T00:36:00.197Z"
+  }
+},
+{
+  "model": "articles.article",
+  "pk": 3,
+  "fields": {
+    "title": "dd",
+    "content": "dd",
+    "created_at": "2020-06-27T00:53:26.267Z",
+    "updated_at": "2020-06-27T00:53:26.267Z"
+  }
+},
+{
+  "model": "articles.article",
+  "pk": 4,
+  "fields": {
+    "title": "dd111",
+    "content": "111",
+    "created_at": "2020-06-27T00:53:34.510Z",
+    "updated_at": "2020-06-27T00:53:34.510Z"
+  }
+}
+]

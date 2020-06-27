@@ -779,3 +779,62 @@ likeButton.addEventListener('click', function(){...})
 
 ---
 
+## Django Pagination
+
+페이징 요청은 이런식
+
+localhost:8000/articles?page=3
+
+
+
+- django pagination 공식 문서에서 샘플코드 따오기
+
+```python
+from django.shortcuts import render
+from myapp.models import Contact
+
+def listing(request):
+    contact_list = Contact.objects.all()
+    paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    # 사용자가 보낸 요청에 page 라는 요청이 있으면 가져와라 
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'list.html', {'page_obj': page_obj})
+```
+
+- 데이터가 여러개인 상황에서 ,  쿼리의 결과값으로 리턴된 리소스를 분할하여 전달 하는 것을 의미 . 즉 . 페이징
+
+수업자료에서 세팅
+
+1.  07_map  pull  해오기
+2.  migrate 하고 runserver
+3.  <views.py>- articles 에서 Paginator  import  하기 
+
+```
+from django.core.paginator import Paginator
+```
+
+4. <views.py>- articles 에서 index에 pagination 하는 구문 추가 작성하기
+
+(참고) Django bootstrap pagination …. 사용하면 편리
+
+-----
+
+## django fixture
+
+### dumpdata
+
+```python
+django-admin dumpdata [app_label[.ModelName] [app_label[.ModelName] ...]]
+# 다시 말하면 콘솔창에 다음과 같이 입력하자
+$ python manage.py dumpdata articles.Article
+# 이것을 파일에 저장
+$ python manage.py dumpdata articles.Article > articles.json
+# 들여쓰기 옵션
+$ python manage.py dumpdata --indent=2 articles.Article > articles.json
+```
+
+### loaddata
+
+자료는 app 폴더의 `fixtures` 안에 있어야 함.

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<h1>NEW</h1>
+<div id="map" style="width:500px;height:400px;"></div>
+<form action="{% url 'articles:create' %}" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form form%}
+  <button class="btn btn-primary">작성</button>
+</form>
+
+<script>
+  //1. 지도를 그릴 공간을 찾기
+  var container = document.querySelector('#map'); //지도를 담을 영역의 DOM 레퍼런스
+
+  //2. 지도 옵션 설정
+  var options = { //지도를 생성할 때 필요한 기본 옵션
+    center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    level: 3, //지도의 레벨(확대, 축소 정도)    
+  };
+
+  //3. 지도 객체 생성
+  var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+  
+  //4. 마커 그리기
+  // 4-1. 마커 객체 생성
+  var marker = new kakao.maps.Marker({ 
+      // 지도 중심좌표에 마커를 생성합니다 
+      position: map.getCenter() 
+  }); 
+  // 4-2. 지도에 마커 표시
+  marker.setMap(map);
+
+ 
+ 
+//5. 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
+    
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
+    
+    //위도
+    var latInput = document.querySelector('#id_lat')  // input 필드 찾아오기
+    latInput.value = latlng.getLat();
+
+    //경도
+    var lngInput = document.querySelector('#id_lng') // input 필드 찾아오기
+    lngInput.value = latlng.getLng();
+    
+});
+
+
+</script>
+
+
+{% endblock %}
