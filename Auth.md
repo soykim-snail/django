@@ -1,8 +1,10 @@
 # Auth
 
-authorization : 권한의 부여
+authorization : 권한의 부여    (determines what an authenticated user is allowed to do)
 
-authentication : 인증
+authentication : 인증    (verifies a user is who they claim to be)
+
+
 
 ---
 
