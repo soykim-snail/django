@@ -194,11 +194,15 @@ trailing comma를 허용한다.
 
 ## VScode, markdown 꿀팁
 
-polar code로 사진찍기, github issue에 사진 저장하고 url 받기
+- polacode로 사진찍기, 
+>`ctrl`+`shift`+`p` 하고 *polacode* 실행
+> 필요부분 드래그하여 **사진**찍기
 
-단축키들 : `alt + 화살표` , `cntrl + l` 
+- github issue에 사진 저장하고 url 받기
 
-콘솔 단축키 : `cntrl + l` (화면 지우기)
+- 단축키들 : `alt + 화살표` , `cntrl + l` 
+
+- 콘솔 단축키 : `cntrl + l` (화면 지우기)
 
 
 
