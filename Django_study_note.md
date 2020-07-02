@@ -1,6 +1,27 @@
 # Django
 
 version 2.1.15
+개발툴 : Visual-Studio-Code
+---
+(참고) Django html의 Emmet 활성화 방법
+- **setting.json**
+1. Configure you file association for Django HTML in the Language Mode menu or drop this in your settings for more precision:
+
+```json
+"files.associations": {
+    "**/*.html": "html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+},
+```
+2. Emmet enthusiasts should have this to their configuration as well:
+
+```json
+"emmet.includeLanguages": {"django-html": "html"},
+```
+
+---
 
 ### 사용방법
 
